@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SpringbootforhaulmontApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringbootforhaulmontApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootforhaulmontApplication.class, args);
+    }
 
 }
