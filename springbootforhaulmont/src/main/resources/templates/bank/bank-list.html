@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Банки</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+
+</head>
+<body>
+<div class="container-fluid my-2">
+    <h1> Перечень банков </h1>
+
+    <br>
+    <br>
+
+    <table border="3" >
+        <thead>
+        <tr>
+            <th> Название </th>
+            <th> Просмотр</th>
+            <th> Обновить </th>
+            <th> Удалить </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="bank : ${listBank}">
+            <td th:text="${bank.name}"></td>
+            <td> <a th:href="@{/bank-view/{id}(id=${bank.id})}"  class="navbar navbar-expand-md navbar-dark">Просмотр</a>
+            <td> <a th:href="@{/show_form_for_update/{id}(id=${bank.id})}"  class="navbar navbar-expand-md navbar-dark"> Обновить </a>
+            <td>  <a th:href="@{/delete_bank/{id}(id=${bank.id})}"  class="navbar navbar-expand-md navbar-dark"> Удалить </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href = "@{/show_new_bank_form}"  class="navbar navbar-expand-md navbar-dark"> Добавить банк </a>
+</div>
+</body>
+</html>
+
+</body>
+</html>
