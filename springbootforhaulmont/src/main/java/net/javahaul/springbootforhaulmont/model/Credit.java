@@ -1,9 +1,7 @@
 package net.javahaul.springbootforhaulmont.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Entity;
 import java.math.BigDecimal;
@@ -14,14 +12,20 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Getter
-@Setter
 public class Credit {
     private UUID id;
     private BigDecimal limitMoney;
     private BigDecimal percentageCredit;
     private String typeCredit;
     private Bank bank;
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
 
     List<OfferCredit> offerCreditList;
 

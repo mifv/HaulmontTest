@@ -1,17 +1,26 @@
 package net.javahaul.springbootforhaulmont.model;
 
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+
+@ToString
 @Table(name = "banks")
 public class Bank {
+    public UUID getBank_id() {
+        return bank_id;
+    }
+
+    public void setBank_id(UUID bank_id) {
+        this.bank_id = bank_id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
