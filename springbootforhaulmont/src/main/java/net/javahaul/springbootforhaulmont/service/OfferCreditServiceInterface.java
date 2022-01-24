@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 public interface OfferCreditServiceInterface {
-    OfferCredit findOfferCredit(UUID id);
-
-    List<OfferCredit> findClientId(UUID clientId);
+    OfferCredit findOfferOfCreditById(UUID id);
+    List<OfferCredit> findByClientId(UUID clientId);
 
     void saveOfferCredit(OfferCredit offerCredit);
 

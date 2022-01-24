@@ -1,6 +1,7 @@
 package net.javahaul.springbootforhaulmont.service;
 
-import net.javahaul.springbootforhaulmont.model.SchedulePayment;
+
+import net.javahaul.springbootforhaulmont.model.ScheduleOfPayment;
 import net.javahaul.springbootforhaulmont.repository.SchedulePaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,22 +17,22 @@ public class SchedulePaymentServiceImpl implements SchedulePaymentServiceInterfa
     }
 
     @Override
-    public List<SchedulePayment> findByOfferOfCreditId(UUID offerOfCreditId) {
+    public List<ScheduleOfPayment> findByOfferOfCreditId(UUID offerOfCreditId) {
         return schedulePaymentRepo.findByOfferOfCreditId(offerOfCreditId);
     }
 
     @Override
-    public void saveAllScheduleOfPayment(List<SchedulePayment> scheduleOfPaymentList) {
+    public void saveAllScheduleOfPayment(List<ScheduleOfPayment> scheduleOfPaymentList) {
         schedulePaymentRepo.saveAll(scheduleOfPaymentList);
     }
 
     @Override
-    public void saveSchedulePayment(SchedulePayment schedulePayment) {
-        schedulePaymentRepo.save(schedulePayment);
+    public void saveScheduleOfPayment(ScheduleOfPayment scheduleOfPayment) {
+        schedulePaymentRepo.save(scheduleOfPayment);
     }
 
     @Override
-    public SchedulePayment findSchedulePayment(UUID id) {
+    public ScheduleOfPayment findScheduleOfPaymentById(UUID id) {
         return schedulePaymentRepo.findById(id).orElse(null);
     }
 
@@ -41,7 +42,7 @@ public class SchedulePaymentServiceImpl implements SchedulePaymentServiceInterfa
     }
 
     @Override
-    public void deleteSchedulePayment(UUID id) {
+    public void deleteScheduleOfPaymentById(UUID id) {
         schedulePaymentRepo.deleteById(id);
     }
 }

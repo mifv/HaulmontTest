@@ -1,17 +1,22 @@
 package net.javahaul.springbootforhaulmont.service;
 
-import net.javahaul.springbootforhaulmont.model.SchedulePayment;
+
+import net.javahaul.springbootforhaulmont.model.ScheduleOfPayment;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface SchedulePaymentServiceInterface {
-    SchedulePayment findSchedulePayment(UUID id);
+    ScheduleOfPayment findScheduleOfPaymentById(UUID id);
 
-    void deleteSchedulePayment(UUID id);
-    void saveAllScheduleOfPayment(List<SchedulePayment> scheduleOfPaymentList);
-    void saveSchedulePayment(SchedulePayment schedulePayment);
+    void deleteScheduleOfPaymentById(UUID id);
+
+    void saveAllScheduleOfPayment(List<ScheduleOfPayment> scheduleOfPaymentList);
+
+    void saveScheduleOfPayment(ScheduleOfPayment scheduleOfPayment);
+
     void deleteAllByCreditOfferId(UUID offerOfCreditId);
-    List<SchedulePayment> findByOfferOfCreditId(UUID offerOfCreditId);
+
+    List<ScheduleOfPayment> findByOfferOfCreditId(UUID offerOfCreditId);
 
 }

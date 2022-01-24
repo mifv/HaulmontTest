@@ -44,7 +44,7 @@ public class ClientController {
             return client.getId() == null ? "/client/client-create" : "/client/client-update";
         }
         clientServiceInterface.saveClient(client);
-        return "redirect:/client_list";
+        return String.format("redirect:/clients/clients_list/%s", client.getBank().getBank_id());
     }
 
     @GetMapping("update_form_client/{clientId}")
@@ -57,7 +57,7 @@ public class ClientController {
     public String deleteClient(@PathVariable("clientId") UUID clientId) {
         UUID bankId = clientServiceInterface.findClient(clientId).getBank().getBank_id();
         clientServiceInterface.deleteClientById(clientId);
-        return "redirect:/client/client_list";
+        return String.format("redirect:/clients/clients_list/%s", bankId);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
