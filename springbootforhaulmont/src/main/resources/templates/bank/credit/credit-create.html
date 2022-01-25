@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Управление кредитами</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 </head>
 <body>
-
+<div class="container-fluid my-2">
+    <hr>
+    <h1 class="navbar navbar-expand-md navbar-dark">Создание кредита</h1>
+    <form action="#" th:action="@{/credits/save_credit}" th:object="${credit}" method="POST">
+        <input type="hidden" th:field="*{bank}" />
+        <input type="number" th:field="*{limitOfMoney}" placeholder=" Лимит по кредиту " class="navbar navbar-expand-md navbar-dark">
+        <input type="number"  th:field="*{creditPercentage}" placeholder=" Процентная ставка " class="navbar navbar-expand-md navbar-dark">
+        <input type="text" th:field="*{typeOfCredit}" placeholder=" Название кредита " class="navbar navbar-expand-md navbar-dark">
+        <button type="submit"> Создать кредит</button>
+    </form>
+    <hr>
+    <a th:href = "@{/credits/credits_list/{id}(id=${credit.bank.id})}" class="navbar navbar-expand-md navbar-dark"> Список кредитов </a>
+    <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark">Дом</a>
+</div>
 </body>
 </html>

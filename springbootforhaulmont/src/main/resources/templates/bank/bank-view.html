@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Администрирование</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 </head>
 <body>
 
+<div class="container-fluid my-2">
+    <hr>
+    <h1 class="navbar navbar-expand-md navbar-dark">Просмотр банка</h1>
+
+    <h2 th:text="${bank.name}" class="navbar navbar-expand-md navbar-dark"> Название </h2>
+    <a th:href = "@{/credits/show_new_credit_form/{id}(id=${bank.getId()})}"  class="navbar navbar-expand-md navbar-dark"> Создать кредит </a>
+    <a th:href = "@{/credits/credits_list/{id}(id=${bank.getId()})}"  class="navbar navbar-expand-md navbar-dark"> Посмотреть кредит </a>
+    <a th:href = "@{/clients/show_new_client_form/{id}(id=${bank.getId()})}" class="navbar navbar-expand-md navbar-dark"> Добавить клиента </a>
+    <a th:href = "@{/clients/clients_list/{id}(id=${bank.getId()})}"   class="navbar navbar-expand-md navbar-dark"> Посмотреть клиентов </a>
+    <hr>
+    <a th:href = "@{/bank_list}" class="navbar navbar-expand-md navbar-dark"> Перечень банков </a>
+</div>
 </body>
 </html>

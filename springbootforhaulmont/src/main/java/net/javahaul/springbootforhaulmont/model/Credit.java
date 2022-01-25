@@ -1,9 +1,8 @@
 package net.javahaul.springbootforhaulmont.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,23 +13,25 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Getter
-@Setter
+
+@Table(name ="CREDIT")
 public class Credit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "CREDIT_ID")
     private UUID id;
 
-
+    @Column(name = "LIMIT_OF_MONEY")
     private BigDecimal limitOfMoney;
-
+    @Column(name = "CREDIT_PERCENTAGE")
     private BigDecimal creditPercentage;
 
-
+    @Column(name = "TYPE_OF_CREDIT")
     public String typeOfCredit;
 
     @ManyToOne
+    @JoinColumn(name = "BANK_ID")
     private Bank bank;
 
     @OneToMany(mappedBy = "credit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -48,19 +49,64 @@ public class Credit {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Credit credit = (Credit) o;
-        return Objects.equals(id, credit.id) &&
-                Objects.equals(limitOfMoney, credit.limitOfMoney) &&
-                Objects.equals(creditPercentage, credit.creditPercentage) &&
-                Objects.equals(typeOfCredit, credit.typeOfCredit) &&
-                Objects.equals(bank, credit.bank) &&
-                Objects.equals(offerOfCreditList, credit.offerOfCreditList);
+
+        return id != null && id.equals(credit.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, limitOfMoney, creditPercentage, typeOfCredit, bank, offerOfCreditList);
+        return Objects.hash(limitOfMoney, creditPercentage, typeOfCredit);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public BigDecimal getLimitOfMoney() {
+        return limitOfMoney;
+    }
+
+    public void setLimitOfMoney(BigDecimal limitOfMoney) {
+        this.limitOfMoney = limitOfMoney;
+    }
+
+    public BigDecimal getCreditPercentage() {
+        return creditPercentage;
+    }
+
+    public void setCreditPercentage(BigDecimal creditPercentage) {
+        this.creditPercentage = creditPercentage;
+    }
+
+    public String getTypeOfCredit() {
+        return typeOfCredit;
+    }
+
+    public void setTypeOfCredit(String typeOfCredit) {
+        this.typeOfCredit = typeOfCredit;
+    }
+
+    public Bank getBank() {
+        return bank;
+    }
+
+    public void setBank(Bank bank) {
+        this.bank = bank;
+    }
+
+    public List<OfferCredit> getOfferOfCreditList() {
+        return offerOfCreditList;
+    }
+
+    public void setOfferOfCreditList(List<OfferCredit> offerOfCreditList) {
+        this.offerOfCreditList = offerOfCreditList;
     }
 }
+
 

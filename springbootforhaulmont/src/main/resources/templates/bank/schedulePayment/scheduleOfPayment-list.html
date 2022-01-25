@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Администрирование </title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid my-2">
+    <h1 class="navbar navbar-expand-md navbar-dark"> График платежей </h1>
+    <table border="3">
+        <thead>
+        <tr>
+            <th> Дата платежа </th>
+            <th> Сумма платежа </th>
+            <th> Сумма гажения тела кредита </th>
+            <th> Сумма гашения процентов </th>
+            <th> Обновление </th>
+            <th> Удаление </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="paymentSchedule : ${listPaymentSchedules}">
+            <td th:text="${paymentSchedule.dateOfPayment}"></td>
+            <td th:text="${paymentSchedule.amountOfPayment}"></td>
+            <td th:text="${paymentSchedule.amountOfPaymentPerBody}"></td>
+            <td th:text="${paymentSchedule.amountOfRepaymentPercent}"></td>
+            <td> <a th:href="@{/payment_schedules/show_form_for_update/{id}(id=${paymentSchedule.id})}" class="navbar navbar-expand-md navbar-dark"> Обновить </a>
+            <td> <a th:href="@{/payment_schedules/delete_payment_schedule/{id}(id=${paymentSchedule.id})}" class="navbar navbar-expand-md navbar-dark"> Удалить </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:if="${!listPaymentSchedules.isEmpty()}" th:href = "@{/clients/clients_list/{id}(id=${listPaymentSchedules.get(0).offerOfCredit.bank.id})}" class="navbar navbar-expand-md navbar-dark"> Список клиентов </a>
+    <a th:if="${!listPaymentSchedules.isEmpty()}" th:href = "@{/bank-view/{id}(id=${listPaymentSchedules.get(0).offerOfCredit.bank.id})}" class="navbar navbar-expand-md navbar-dark"> Банк </a>
+    <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark"> Дом </a>
+</div>
+</body>
+</html>

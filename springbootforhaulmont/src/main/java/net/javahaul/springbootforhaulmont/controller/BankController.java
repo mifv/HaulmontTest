@@ -27,7 +27,7 @@ public class BankController {
         return "/bank/bank-list";
     }
 
-    @GetMapping("/form_new_bank")
+    @GetMapping("/show_new_bank_form")
     public String newBank(Model model) {
         model.addAttribute("bank", new Bank());
         return "bank/bank-create";
@@ -49,7 +49,7 @@ public class BankController {
 
     }
 
-    @GetMapping("/form_update_bank/{bankId}")
+    @GetMapping("/show_form_for_update/{bankId}")
     public String updateFormBank(@PathVariable("bankId") UUID bankId, Model model) {
         model.addAttribute("bank", bankServiceInterface.findBankByID(bankId));
         return "bank/bank-update";

@@ -4,10 +4,12 @@ package net.javahaul.springbootforhaulmont.service;
 import net.javahaul.springbootforhaulmont.model.ScheduleOfPayment;
 import net.javahaul.springbootforhaulmont.repository.SchedulePaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class SchedulePaymentServiceImpl implements SchedulePaymentServiceInterface {
     private SchedulePaymentRepo schedulePaymentRepo;
 

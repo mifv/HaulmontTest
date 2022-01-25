@@ -17,15 +17,15 @@ import java.util.List;
 @Component
 public class CalculationPaymentService {
     private final OfferCreditServiceInterface offerCreditInterface;
-    private final SchedulePaymentServiceInterface schedulePaymentInterface;
-    private final EntityManager entityManager;
+    private final SchedulePaymentServiceInterface schedulePaymentServiceInterface;
 
-
-    public CalculationPaymentService(OfferCreditServiceInterface offerCreditInterface, SchedulePaymentServiceInterface schedulePaymentInterface, EntityManager entityManager) {
+    public CalculationPaymentService(OfferCreditServiceInterface offerCreditInterface, SchedulePaymentServiceInterface schedulePaymentServiceInterface, EntityManager entityManager) {
         this.offerCreditInterface = offerCreditInterface;
-        this.schedulePaymentInterface = schedulePaymentInterface;
+        this.schedulePaymentServiceInterface = schedulePaymentServiceInterface;
         this.entityManager = entityManager;
     }
+
+    private final EntityManager entityManager;
 
 
     public void collectDataAboutOfferOfCredit(OfferCredit offerCredit) {
@@ -76,12 +76,12 @@ public class CalculationPaymentService {
 
     private void saveAll(OfferCredit offerOfCredit, List<ScheduleOfPayment> paymentScheduleList) {
         offerCreditInterface.saveOfferCredit(offerOfCredit);
-        schedulePaymentInterface.saveAllScheduleOfPayment(paymentScheduleList);
+        schedulePaymentServiceInterface.saveAllScheduleOfPayment(paymentScheduleList);
     }
 
     private OfferCredit mergeAndClearPaymentScheduleList(OfferCredit offerOfCredit) {
         offerOfCredit = entityManager.merge(offerOfCredit);
-        schedulePaymentInterface.deleteAllByCreditOfferId(offerOfCredit.getId());
+        schedulePaymentServiceInterface.deleteAllByCreditOfferId(offerOfCredit.getId());
         return offerOfCredit;
     }
 }

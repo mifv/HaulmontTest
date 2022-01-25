@@ -1,6 +1,7 @@
 package net.javahaul.springbootforhaulmont.model;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,24 +13,24 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @Entity
-@Getter
-@Setter
 @ToString
+@Table(name = "SCHEDULE_OF_PAYMENT")
 public class ScheduleOfPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "SCHEDULE_OF_PAYMENT_ID")
     private UUID id;
 
-
+    @Column(name = "DATE_OF_PAYMENT")
     private LocalDate datePayment;
-
+    @Column(name = "AMOUNT_OF_PAYMENT")
     private BigDecimal amountPayment;
-
+    @Column(name = "AMOUNT_OF_PAYMENT_PER_BODY")
     private BigDecimal amountPaymentPerBody;
 
-
+    @Column(name = "AMOUNT_OF_REPAYMENT_PERCENT")
     private BigDecimal amountRepaymentPercent;
-
+    @Column(name = "BALANCE")
     private BigDecimal balance;
 
     @ManyToOne
@@ -40,13 +41,10 @@ public class ScheduleOfPayment {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         ScheduleOfPayment that = (ScheduleOfPayment) o;
-        return Objects.equals(datePayment, that.datePayment) &&
-                Objects.equals(amountPayment, that.amountPayment) &&
-                Objects.equals(amountPaymentPerBody, that.amountPaymentPerBody) &&
-                Objects.equals(amountRepaymentPercent, that.amountRepaymentPercent) &&
-                Objects.equals(balance, that.balance);
+
+        return id != null && id.equals(that.id);
     }
 
     @Override
@@ -54,6 +52,61 @@ public class ScheduleOfPayment {
         return Objects.hash(datePayment, amountPayment, amountPaymentPerBody, amountRepaymentPercent, balance);
     }
 
+    public UUID getId() {
+        return id;
+    }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public LocalDate getDatePayment() {
+        return datePayment;
+    }
+
+    public void setDatePayment(LocalDate datePayment) {
+        this.datePayment = datePayment;
+    }
+
+    public BigDecimal getAmountPayment() {
+        return amountPayment;
+    }
+
+    public void setAmountPayment(BigDecimal amountPayment) {
+        this.amountPayment = amountPayment;
+    }
+
+    public BigDecimal getAmountPaymentPerBody() {
+        return amountPaymentPerBody;
+    }
+
+    public void setAmountPaymentPerBody(BigDecimal amountPaymentPerBody) {
+        this.amountPaymentPerBody = amountPaymentPerBody;
+    }
+
+    public BigDecimal getAmountRepaymentPercent() {
+        return amountRepaymentPercent;
+    }
+
+    public void setAmountRepaymentPercent(BigDecimal amountRepaymentPercent) {
+        this.amountRepaymentPercent = amountRepaymentPercent;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public OfferCredit getOfferOfCredit() {
+        return offerOfCredit;
+    }
+
+    public void setOfferOfCredit(OfferCredit offerOfCredit) {
+        this.offerOfCredit = offerOfCredit;
+    }
 }
+
 

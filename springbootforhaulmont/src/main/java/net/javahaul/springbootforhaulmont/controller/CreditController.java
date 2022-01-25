@@ -26,31 +26,31 @@ public class CreditController {
     @GetMapping("/credits_list/{bankId}")
     public String homePage(@PathVariable("bankId") UUID bankId, Model model) {
         model.addAttribute("creditsList", creditServiceInterface.findBankId(bankId));
-        return "credit/credit-list";
+        return "bank/credit/credit-list";
     }
 
-    @GetMapping("new_form_credit/{bankId}")
+    @GetMapping("/show_new_credit_form/{bankId}")
     public String newCredit(@PathVariable("bankId") UUID bankId, Model model) {
         Credit credit = new Credit();
         credit.setBank(bankServiceInterface.findBankByID(bankId));
         model.addAttribute("credit", credit);
-        return "/credit/credit-create";
+        return "bank/credit/credit-create";
     }
 
     @PostMapping("save_credit")
     public String saveCredit(@ModelAttribute Credit credit, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return credit.getId() == null ? "/credit/credit-create" : "/credit/credit-update";
+            return credit.getId() == null ? "bank/credit/credit-create" : "bank/credit/credit-update";
         }
         UUID bankId = credit.getBank().getBank_id();
         creditServiceInterface.saveCredit(credit);
         return String.format("redirect:/credits/credits_list/%s", bankId);
     }
 
-    @GetMapping("update_form/{creditId}")
+    @GetMapping("/show_form_for_update/{creditId}")
     public String formUpdate(@PathVariable("creditId") UUID creditId, Model model) {
         model.addAttribute("credit", creditServiceInterface.findCredit(creditId));
-        return "/credit/credit-update";
+        return "bank/credit/credit-update";
     }
 
     @GetMapping("delete_credit/{creditId}")

@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title> Кредитные предложения </title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 </head>
 <body>
+<div class="container-fluid my-2">
+    <h1 class="navbar navbar-expand-md navbar-dark">Кредитные предложения</h1>
 
+    <a th:if="${!listCreditOffers.isEmpty()}" th:href = "@{/clients/clients_list/{id}(id=${listCreditOffers.get(0).bank.id})}" class="navbar navbar-expand-md navbar-dark"> Список клиентов </a>
+    <table border="3">
+        <thead>
+        <tr>
+            <th>Название кредита</th>
+            <th>Сумма кредита</th>
+            <th>Срок кредита</th>
+            <th>Сумма процентов</th>
+            <th>Данные о банке</th>
+            <th>Данные о кредите</th>
+            <th>Данные о клиенте</th>
+            <th>Обновить</th>
+            <th>Удалить</th>
+            <th>График платежей</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="creditOffer : ${listCreditOffers}">
+            <td th:text="${creditOffer.nameOfCredit}"></td>
+            <td th:text="${creditOffer.sum}"></td>
+            <td th:text="${creditOffer.creditTerm}"></td>
+            <td th:text="${creditOffer.sumOfPercent}"></td>
+            <td th:text="${creditOffer.bank}"></td>
+            <td th:text="${creditOffer.credit}"></td>
+            <td th:text="${creditOffer.client}"></td>
+            <td> <a th:href="@{/credit_offers/show_form_for_update/{id}(id=${creditOffer.id})}" class="navbar navbar-expand-md navbar-dark"> Обновить </a>
+            <td> <a th:href="@{/credit_offers/delete_credit_offer/{id}(id=${creditOffer.id})}" class="navbar navbar-expand-md navbar-dark"> Удалить </a>
+            <td> <a th:href="@{/payment_schedules/payment_schedules_list/{id}(id=${creditOffer.id})}" class="navbar navbar-expand-md navbar-dark"> График </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark">Дом</a>
+</div>
 </body>
 </html>

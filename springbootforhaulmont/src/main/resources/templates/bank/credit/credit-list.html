@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Управление кредитами</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 </head>
 <body>
+<div class="container-fluid my-2">
+    <h1>Список кредитов</h1>
 
+    <a th:if="${!listOfCredits.isEmpty()}" th:href = "@{/credits/show_new_credit_form/{id}(id=${listOfCredits.get(0).bank.id})}" class="navbar navbar-expand-md navbar-dark"> Создать кредит </a>
+    <table border="3">
+        <thead>
+        <tr>
+            <th> Лимит по кредиту </th>
+            <th> Процентная ставка </th>
+            <th> Название кредита </th>
+            <th> Обновление </th>
+            <th> Удаление </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="credit : ${}">
+            <td th:text="${credit.limitOfMoney}"></td>
+            <td th:text="${credit.creditPercentage}"></td>
+            <td th:text="${credit.typeCredit}"></td>
+            <td> <a th:href="@{/credits/show_form_for_update/{id}(id=${credit.id})}" class="navbar navbar-expand-md navbar-dark">Обновить</a>
+            <td>   <a th:href="@{/credits/delete_credit/{id}(id=${credit.id})}" class="navbar navbar-expand-md navbar-dark">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:if="${!listCredits.isEmpty()}" th:href = "@{/bank-view/{id}(id=${listCredits.get(0).bank.id})}" class="navbar navbar-expand-md navbar-dark">Банк</a>
+    <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark">Дом</a>
+</div>
 </body>
 </html>
+
+

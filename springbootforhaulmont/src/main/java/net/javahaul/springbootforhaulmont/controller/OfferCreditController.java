@@ -34,7 +34,7 @@ public class OfferCreditController {
     @GetMapping("/credit_offers_list/{clientId}")
     public String homePage(@PathVariable("clientId") UUID clientId, Model model) {
         model.addAttribute("listCreditOffers", offerCreditServiceInterface.findOfferOfCreditById(clientId));
-        return "/offerOfCredit/offerOfCredit-list";
+        return "/bank/offerCredit/offerCredit-list";
     }
 
     @GetMapping("/show_new_credit_offer_form/{clientId}")
@@ -42,7 +42,7 @@ public class OfferCreditController {
         Client client = clientServiceInterface.findClient(clientId);
         model.addAttribute("offerOfCredit", OfferCredit.builder().client(client)
                 .bank(bankServiceInterface.findBankByID(client.getBank().getBank_id())).build());
-        return "/offerOfCredit/offerOfCredit-create";
+        return "/bank/offerCredit/offerCredit-create";
 
     }
 
@@ -51,8 +51,8 @@ public class OfferCreditController {
                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return offerOfCredit.getId() == null
-                    ? "/offerOfCredit/offerOfCredit-create"
-                    : "/offerOfCredit/offerOfCredit-update";
+                    ? "bank/offerCredit/offerCredit-create"
+                    : "bank/offerCredit/offerCredit-update";
         }
         calculationPaymentService.collectDataAboutOfferOfCredit(offerOfCredit);
         UUID clientId = offerOfCredit.getClient().getId();
@@ -62,7 +62,7 @@ public class OfferCreditController {
     @GetMapping("/show_form_for_update/{offerOfCreditId}")
     public String formForUpdate(@PathVariable("offerOfCreditId") UUID offerOfCreditId, Model model) {
         model.addAttribute("offerOfCredit", offerCreditServiceInterface.findOfferOfCreditById(offerOfCreditId));
-        return "/offerOfCredit/offerOfCredit-update";
+        return "bank/offerCredit/offerCredit-update";
     }
 
     @GetMapping("/delete_credit_offer/{offerOfCreditId}")

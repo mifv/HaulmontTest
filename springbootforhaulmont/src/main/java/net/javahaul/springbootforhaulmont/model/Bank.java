@@ -1,6 +1,7 @@
 package net.javahaul.springbootforhaulmont.model;
 
 import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,22 +12,22 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @ToString
-@Table(name = "banks")
+@Table(name = "BANK")
+
 public class Bank {
     public UUID getBank_id() {
-        return bank_id;
+        return id;
     }
 
-    public void setBank_id(UUID bank_id) {
-        this.bank_id = bank_id;
-    }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID bank_id;
+    @Column(name = "BANK_ID")
+    private UUID id;
 
-
-    private String Bank_name;
+    @Column(name = "BANK_NAME")
+    private String name;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -39,16 +40,46 @@ public class Bank {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Bank bank = (Bank) o;
-        return Objects.equals(bank_id, bank.bank_id) &&
-                Objects.equals(Bank_name, bank.Bank_name) &&
-                Objects.equals(listOfCredits, bank.listOfCredits) &&
-                Objects.equals(listOfClients, bank.listOfClients);
+
+        return id != null && id.equals(bank.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Bank_name);
+        return Objects.hash(name);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Credit> getListOfCredits() {
+        return listOfCredits;
+    }
+
+    public void setListOfCredits(List<Credit> listOfCredits) {
+        this.listOfCredits = listOfCredits;
+    }
+
+    public List<Client> getListOfClients() {
+        return listOfClients;
+    }
+
+    public void setListOfClients(List<Client> listOfClients) {
+        this.listOfClients = listOfClients;
     }
 }

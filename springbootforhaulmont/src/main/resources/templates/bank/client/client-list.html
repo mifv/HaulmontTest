@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Клиенты</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 </head>
 <body>
-
+<div class="container-fluid my-2">
+    <div th:switch="${listClients}">
+        <h2 th:case="null"> Клиенты не найдены!</h2>
+        <div th:case="*">
+            <h2> Клиенты </h2>
+            <table border="3">
+                <thead>
+                <tr>
+                    <th> Фамилия </th>
+                    <th> Имя </th>
+                    <th> Отчетсво </th>
+                    <th> Номер телефона </th>
+                    <th> Электронная почта </th>
+                    <th> Номер паспорта </th>
+                    <th> Кредитное предложение  </th>
+                    <th> Обновить данные  </th>
+                    <th> Удалить </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="client : ${listClients}">
+                    <td th:text="${client.lastName}"></td>
+                    <td th:text="${client.firstName}"></td>
+                    <td th:text="${client.middleName}"></td>
+                    <td th:text="${client.phone}"></td>
+                    <td th:text="${client.email}"></td>
+                    <td th:text="${client.passport}"></td>
+                    <td> <a th:href="@{/credit_offers/show_new_credit_offer_form/{id}(id=${client.()})}" class="navbar navbar-expand-md navbar-dark"> Оформить кредитное предложение </a>
+                    <td> <a th:href="@{/clients/show_form_for_update/{id}(id=${client.id()})}" class="navbar navbar-expand-md navbar-dark"> Обновить данные о клиенте </a>
+                    <td> <a th:href="@{/clients/delete_client/{id}(id=${client.getId()})}" class="navbar navbar-expand-md navbar-dark"> Удалить </a>
+                    </td>
+                </tr>
+                <hr>
+                <a th:if="${!listClients.isEmpty()}" th:href = "@{/bank-view/{id}(id=${listClients.get(0).bank.id})}" class="navbar navbar-expand-md navbar-dark"> Меню банка </a>
+                </tbody>
+            </table>
+        </div>
+        <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark"> Домой </a>
+    </div>
+</div>
 </body>
 </html>

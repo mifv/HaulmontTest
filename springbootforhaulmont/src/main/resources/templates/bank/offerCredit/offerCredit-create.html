@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Кредитные предложения</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 </head>
 <body>
+<div class="container-fluid my-2">
+    <h1 class="navbar navbar-expand-md navbar-dark">Создать кредитное предложение</h1>
 
+
+    <form action="#" th:action="@{/credit_offers/save_credit_offer}" th:object="${offerOfCredit}" method="POST">
+        <select  th:value="${offerOfCredit}" name=" Кредитное предложение " class="navbar navbar-expand-md navbar-dark" th:field="*{credit}">
+            <option value="" selected="selected" class="navbar navbar-expand-md navbar-dark"> Выбор кредита </option>
+            <option th:each="credit : ${offerOfCredit.getBank().getListOfCredits()}" th:value="${credit.id}" th:text="${credit}" th:selected="${credit.id}"></option>
+
+        </select>
+        <br>
+        <input type="hidden" th:field="*{client}" />
+        <input type="hidden" th:field="*{bank}" />
+        <br>
+        <a th:href = "@{/credits/show_new_credit_form/{id}(id=${offerOfCredit.bank.id})}" class="navbar navbar-expand-md navbar-dark"> Создать кредит </a>
+        <br>
+        <input type="text" th:field="*{nameOfCredit}" placeholder=" Название кредита " class="navbar navbar-expand-md navbar-dark">
+        <input type="number"  th:field="*{sum}" placeholder=" Суммма кредита " class="navbar navbar-expand-md navbar-dark">
+        <input type="number"  th:field="*{creditTerm}" placeholder=" Срок кредита " class="navbar navbar-expand-md navbar-dark">
+        <input type="number"  th:field="*{firstPayment}" placeholder=" Первый платеж " class="navbar navbar-expand-md navbar-dark">
+        <button type="submit" class="navbar navbar-expand-md navbar-dark"> Создать кредитное предложение </button>
+    </form>
+    <hr>
+    <a th:href = "@{/credit_offers/credit_offers_list/{id}(id=${offerOfCredit.client.id})}" class="navbar navbar-expand-md navbar-dark">Список кредитных предложений для клиента</a>
+    <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark"> Дом </a>
+</div>
 </body>
 </html>

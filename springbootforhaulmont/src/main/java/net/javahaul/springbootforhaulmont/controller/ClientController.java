@@ -25,32 +25,32 @@ public class ClientController {
 
     @GetMapping("/clients_list/{bankId}")
     public String homePage(@PathVariable("bankId") UUID bankId, Model model) {
-        clientServiceInterface.findBankId(bankId);
-        return "/client/client-list";
+        model.addAttribute("listClients", clientServiceInterface.findBankId(bankId));
+        return "bank/client/client-list";
     }
 
-    @GetMapping("client_new_form/{bankId}")
+    @GetMapping("/show_new_client_form/{bankId}")
     public String newClient(@PathVariable("bankId") UUID bankId, Model model) {
         Client client = new Client();
         client.setBank(bankServiceInterface.findBankByID(bankId));
         model.addAttribute("client", client);
-        return "/client/client-create";
+        return "bank/client/client-create";
 
     }
 
     @PostMapping("save_client")
     public String saveClient(@ModelAttribute Client client, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return client.getId() == null ? "/client/client-create" : "/client/client-update";
+            return client.getId() == null ? "bank/client/client-create" : "bank/client/client-update";
         }
         clientServiceInterface.saveClient(client);
         return String.format("redirect:/clients/clients_list/%s", client.getBank().getBank_id());
     }
 
-    @GetMapping("update_form_client/{clientId}")
+    @GetMapping("/show_form_for_update/{clientId}")
     public String updateFormClient(@PathVariable("clientId") UUID clientId, Model model) {
-        model.addAttribute(clientServiceInterface.findClient(clientId));
-        return "/client/client-update";
+        model.addAttribute("client", clientServiceInterface.findClient(clientId));
+        return "bank/client/client-update";
     }
 
     @GetMapping("delete_client/{clientId}")

@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>База Клиентов</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 </head>
 <body>
-
+<div class="container-fluid my-2">
+    <h1>База клиентов</h1>
+    <hr>
+    <h2>Обновить данные клиента</h2>
+    <form action="#" th:action="@{/clients/save_client/}" th:object="${client}" method="POST">
+        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{bank}" />
+        <input type="text" th:field="*{lastName}" placeholder=" Фамилия " class="navbar navbar-expand-md navbar-dark">
+        <input type="text" th:field="*{firstName}" placeholder=" Имя " class="navbar navbar-expand-md navbar-dark">
+        <input type="text" th:field="*{middleName}" placeholder=" Отчество " class="navbar navbar-expand-md navbar-dark">
+        <input type="text" th:field="*{phoneNumber}" placeholder=" Номер телефона " class="navbar navbar-expand-md navbar-dark">
+        <input type="text" th:field="*{email}" placeholder=" Электронная почта " class="navbar navbar-expand-md navbar-dark">
+        <input type="text" th:field="*{passport}" placeholder=" Номер пасспорта" class="navbar navbar-expand-md navbar-dark">
+        <button type="submit" class="navbar navbar-expand-md navbar-dark">Обновить данные</button>
+    </form>
+    <hr>
+    <a th:href = "@{/clients/clients_list/{id}(id=${client.bank.id})}" class="navbar navbar-expand-md navbar-dark">Список клиентов</a>
+    <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark">Домой</a>
+</div>
 </body>
 </html>

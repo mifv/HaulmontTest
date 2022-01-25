@@ -2,6 +2,7 @@ package net.javahaul.springbootforhaulmont.controller;
 
 import net.javahaul.springbootforhaulmont.model.ScheduleOfPayment;
 import net.javahaul.springbootforhaulmont.service.SchedulePaymentServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class SchedulePaymentController {
 
     public SchedulePaymentServiceInterface schedulePaymentServiceInterface;
-
+@Autowired
     public SchedulePaymentController(SchedulePaymentServiceInterface schedulePaymentServiceInterface) {
         this.schedulePaymentServiceInterface = schedulePaymentServiceInterface;
     }
@@ -22,14 +23,14 @@ public class SchedulePaymentController {
     @GetMapping("/payment_schedules_list/{offerOfCreditId}")
     public String homePage(@PathVariable("offerOfCreditId") UUID offerOfCreditId, Model model) {
         model.addAttribute("listPaymentSchedules", schedulePaymentServiceInterface.findByOfferOfCreditId(offerOfCreditId));
-        return "/scheduleOfPayment/scheduleOfPayment-list";
+        return "/bank/schedulePayment/scheduleOfPayment-list";
     }
 
     @PostMapping("/save_payment_schedule")
     public String saveScheduleOfPayment(@ModelAttribute("paymentSchedule") ScheduleOfPayment schedulePayment,
                                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/scheduleOfPayment/scheduleOfPayment-update";
+            return "/bank/schedulePayment/scheduleOfPayment-update";
         }
         UUID offerOfCreditId = schedulePayment.getOfferOfCredit().getId();
         schedulePaymentServiceInterface.saveScheduleOfPayment(schedulePayment);
@@ -39,7 +40,7 @@ public class SchedulePaymentController {
     @GetMapping("/show_form_for_update/{paymentScheduleId}")
     public String formForUpdate(@PathVariable("paymentScheduleId") UUID paymentScheduleId, Model model) {
         model.addAttribute("paymentSchedule", schedulePaymentServiceInterface.findScheduleOfPaymentById(paymentScheduleId));
-        return "scheduleOfPayment/scheduleOfPayment-update";
+        return "bank/schedulePayment/scheduleOfPayment-update";
     }
 
     @GetMapping("/delete_payment_schedule/{paymentScheduleId}")

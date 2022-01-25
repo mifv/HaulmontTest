@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Администрирование</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
 </head>
 <body>
-
+<div class="container-fluid my-2">
+    <hr>
+    <h1  class="navbar navbar-expand-md navbar-dark">Обновить банк</h1>
+    <form action="#" th:action="@{/save_bank}" th:object="${bank}" method="POST">
+        <input type="hidden" th:field="*{id}" />
+        <input type="text" th:field="*{name}" placeholder=" Название "  class="navbar navbar-expand-md navbar-dark">
+        <button type="submit"  class="navbar navbar-expand-md navbar-dark"> Обновить данные </button>
+    </form>
+    <hr>
+    <a th:href = "@{/bank_list}"  class="navbar navbar-expand-md navbar-dark"> Перечень Банков </a>
+</div>
 </body>
 </html>
