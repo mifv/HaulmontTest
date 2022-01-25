@@ -1,7 +1,9 @@
 package net.javahaul.springbootforhaulmont.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -12,11 +14,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Getter
+@Setter
 public class Credit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private UUID id;
 
 
@@ -31,55 +34,8 @@ public class Credit {
     private Bank bank;
 
     @OneToMany(mappedBy = "credit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List <OfferCredit> offerOfCreditList;
+    private List<OfferCredit> offerOfCreditList;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public BigDecimal getLimitOfMoney() {
-        return limitOfMoney;
-    }
-
-    public void setLimitOfMoney(BigDecimal limitOfMoney) {
-        this.limitOfMoney = limitOfMoney;
-    }
-
-    public BigDecimal getCreditPercentage() {
-        return creditPercentage;
-    }
-
-    public void setCreditPercentage(BigDecimal creditPercentage) {
-        this.creditPercentage = creditPercentage;
-    }
-
-    public String getTypeOfCredit() {
-        return typeOfCredit;
-    }
-
-    public void setTypeOfCredit(String typeOfCredit) {
-        this.typeOfCredit = typeOfCredit;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
-
-    public List<OfferCredit> getOfferOfCreditList() {
-        return offerOfCreditList;
-    }
-
-    public void setOfferOfCreditList(List<OfferCredit> offerOfCreditList) {
-        this.offerOfCreditList = offerOfCreditList;
-    }
 
     @Override
     public String toString() {

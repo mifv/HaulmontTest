@@ -10,7 +10,6 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
 @ToString
 @Table(name = "banks")
 public class Bank {
@@ -24,10 +23,9 @@ public class Bank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "bank_id")
     private UUID bank_id;
 
-    @Column(name = "bank_name")
+
     private String Bank_name;
 
     @ToString.Exclude

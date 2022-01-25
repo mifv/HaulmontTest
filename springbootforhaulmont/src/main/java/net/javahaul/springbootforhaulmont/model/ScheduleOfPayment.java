@@ -12,12 +12,12 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @Entity
-
+@Getter
+@Setter
 @ToString
 public class ScheduleOfPayment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private UUID id;
 
 
@@ -37,8 +37,6 @@ public class ScheduleOfPayment {
     private OfferCredit offerOfCredit;
 
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -54,62 +52,6 @@ public class ScheduleOfPayment {
     @Override
     public int hashCode() {
         return Objects.hash(datePayment, amountPayment, amountPaymentPerBody, amountRepaymentPercent, balance);
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public LocalDate getDatePayment() {
-        return datePayment;
-    }
-
-    public void setDatePayment(LocalDate datePayment) {
-        this.datePayment = datePayment;
-    }
-
-    public BigDecimal getAmountPayment() {
-        return amountPayment;
-    }
-
-    public void setAmountPayment(BigDecimal amountPayment) {
-        this.amountPayment = amountPayment;
-    }
-
-    public BigDecimal getAmountPaymentPerBody() {
-        return amountPaymentPerBody;
-    }
-
-    public void setAmountPaymentPerBody(BigDecimal amountPaymentPerBody) {
-        this.amountPaymentPerBody = amountPaymentPerBody;
-    }
-
-    public BigDecimal getAmountRepaymentPercent() {
-        return amountRepaymentPercent;
-    }
-
-    public void setAmountRepaymentPercent(BigDecimal amountRepaymentPercent) {
-        this.amountRepaymentPercent = amountRepaymentPercent;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public OfferCredit getOfferOfCredit() {
-        return offerOfCredit;
-    }
-
-    public void setOfferOfCredit(OfferCredit offerOfCredit) {
-        this.offerOfCredit = offerOfCredit;
     }
 
 

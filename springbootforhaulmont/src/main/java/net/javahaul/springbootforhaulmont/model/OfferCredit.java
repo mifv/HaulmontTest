@@ -1,9 +1,6 @@
 package net.javahaul.springbootforhaulmont.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -17,11 +14,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @ToString
 @Entity
+@Getter
+@Setter
 public class OfferCredit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private UUID id;
 
     @ToString.Exclude
@@ -36,7 +34,7 @@ public class OfferCredit {
     private BigDecimal sum;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "offerCredit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "offerOfCredit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ScheduleOfPayment> scheduleOfPayment;
 
     @Column(name = "NAME_OF_CREDIT")
@@ -76,85 +74,7 @@ public class OfferCredit {
     public int hashCode() {
         return Objects.hash(sum, scheduleOfPayment, nameCredit, sumPercent, firstPayment, creditTerm, bank);
     }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Credit getCredit() {
-        return credit;
-    }
-
-    public void setCredit(Credit credit) {
-        this.credit = credit;
-    }
-
-    public BigDecimal getSum() {
-        return sum;
-    }
-
-    public void setSum(BigDecimal sum) {
-        this.sum = sum;
-    }
-
-    public List<ScheduleOfPayment> getScheduleOfPayment() {
-        return scheduleOfPayment;
-    }
-
-    public void setScheduleOfPayment(List<ScheduleOfPayment> scheduleOfPayment) {
-        this.scheduleOfPayment = scheduleOfPayment;
-    }
-
-    public String getNameCredit() {
-        return nameCredit;
-    }
-
-    public void setNameCredit(String nameCredit) {
-        this.nameCredit = nameCredit;
-    }
-
-    public BigDecimal getSumPercent() {
-        return sumPercent;
-    }
-
-    public void setSumPercent(BigDecimal sumPercent) {
-        this.sumPercent = sumPercent;
-    }
-
-    public BigDecimal getFirstPayment() {
-        return firstPayment;
-    }
-
-    public void setFirstPayment(BigDecimal firstPayment) {
-        this.firstPayment = firstPayment;
-    }
-
-    public Integer getCreditTerm() {
-        return creditTerm;
-    }
-
-    public void setCreditTerm(Integer creditTerm) {
-        this.creditTerm = creditTerm;
-    }
-
-    public Bank getBank() {
-        return bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
 }
+
+
 

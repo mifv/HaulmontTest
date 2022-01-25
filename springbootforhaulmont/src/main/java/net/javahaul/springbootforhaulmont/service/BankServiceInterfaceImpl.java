@@ -1,9 +1,10 @@
 package net.javahaul.springbootforhaulmont.service;
 
-import com.sun.istack.Nullable;
+
 import net.javahaul.springbootforhaulmont.model.Bank;
 import net.javahaul.springbootforhaulmont.repository.BankRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
