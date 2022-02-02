@@ -25,14 +25,14 @@ public class CreditController {
 
     @GetMapping("/credits_list/{bankId}")
     public String homePage(@PathVariable("bankId") UUID bankId, Model model) {
-        model.addAttribute("creditsList", creditServiceInterface.findBankId(bankId));
+        model.addAttribute("listCredits", creditServiceInterface.findBankId(bankId));
         return "bank/credit/credit-list";
     }
 
     @GetMapping("/show_new_credit_form/{bankId}")
     public String newCredit(@PathVariable("bankId") UUID bankId, Model model) {
         Credit credit = new Credit();
-        credit.setBank(bankServiceInterface.findBankByID(bankId));
+        credit.setBank(bankServiceInterface.getBank(bankId));
         model.addAttribute("credit", credit);
         return "bank/credit/credit-create";
     }

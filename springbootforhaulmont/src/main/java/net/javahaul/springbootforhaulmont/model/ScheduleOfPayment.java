@@ -22,14 +22,14 @@ public class ScheduleOfPayment {
     private UUID id;
 
     @Column(name = "DATE_OF_PAYMENT")
-    private LocalDate datePayment;
+    private LocalDate dateOfPayment;
     @Column(name = "AMOUNT_OF_PAYMENT")
-    private BigDecimal amountPayment;
+    private BigDecimal amountOfPayment;
     @Column(name = "AMOUNT_OF_PAYMENT_PER_BODY")
-    private BigDecimal amountPaymentPerBody;
+    private BigDecimal amountOfPaymentPerBody;
 
     @Column(name = "AMOUNT_OF_REPAYMENT_PERCENT")
-    private BigDecimal amountRepaymentPercent;
+    private BigDecimal amountOfRepaymentPercent;
     @Column(name = "BALANCE")
     private BigDecimal balance;
 
@@ -49,7 +49,7 @@ public class ScheduleOfPayment {
 
     @Override
     public int hashCode() {
-        return Objects.hash(datePayment, amountPayment, amountPaymentPerBody, amountRepaymentPercent, balance);
+        return Objects.hash(dateOfPayment, amountOfPayment, amountOfPaymentPerBody, amountOfRepaymentPercent, balance);
     }
 
     public UUID getId() {
@@ -61,36 +61,50 @@ public class ScheduleOfPayment {
     }
 
     public LocalDate getDatePayment() {
-        return datePayment;
+        return dateOfPayment;
     }
 
     public void setDatePayment(LocalDate datePayment) {
-        this.datePayment = datePayment;
+        this.dateOfPayment = datePayment;
     }
 
     public BigDecimal getAmountPayment() {
-        return amountPayment;
+        return amountOfPayment;
     }
 
     public void setAmountPayment(BigDecimal amountPayment) {
-        this.amountPayment = amountPayment;
+        this.amountOfPayment = amountPayment;
     }
 
     public BigDecimal getAmountPaymentPerBody() {
-        return amountPaymentPerBody;
+        return amountOfPaymentPerBody;
     }
 
     public void setAmountPaymentPerBody(BigDecimal amountPaymentPerBody) {
-        this.amountPaymentPerBody = amountPaymentPerBody;
+        this.amountOfPaymentPerBody = amountPaymentPerBody;
     }
 
-    public BigDecimal getAmountRepaymentPercent() {
-        return amountRepaymentPercent;
+    public LocalDate getDateOfPayment() {
+        return dateOfPayment;
     }
 
-    public void setAmountRepaymentPercent(BigDecimal amountRepaymentPercent) {
-        this.amountRepaymentPercent = amountRepaymentPercent;
+
+    public BigDecimal getAmountOfPayment() {
+        return amountOfPayment;
     }
+
+
+
+    public BigDecimal getAmountOfPaymentPerBody() {
+        return amountOfPaymentPerBody;
+    }
+
+
+    public BigDecimal getAmountOfRepaymentPercent() {
+        return amountOfRepaymentPercent;
+    }
+
+
 
     public BigDecimal getBalance() {
         return balance;

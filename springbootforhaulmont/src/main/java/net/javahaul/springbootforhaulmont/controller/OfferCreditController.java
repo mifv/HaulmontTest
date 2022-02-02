@@ -33,7 +33,7 @@ public class OfferCreditController {
 
     @GetMapping("/credit_offers_list/{clientId}")
     public String homePage(@PathVariable("clientId") UUID clientId, Model model) {
-        model.addAttribute("listCreditOffers", offerCreditServiceInterface.findOfferOfCreditById(clientId));
+        model.addAttribute("listCreditOffers", offerCreditServiceInterface.findByClientId(clientId));
         return "/bank/offerCredit/offerCredit-list";
     }
 
@@ -41,7 +41,7 @@ public class OfferCreditController {
     public String newOfferOfCreditForm(@PathVariable("clientId") UUID clientId, Model model) {
         Client client = clientServiceInterface.findClient(clientId);
         model.addAttribute("offerOfCredit", OfferCredit.builder().client(client)
-                .bank(bankServiceInterface.findBankByID(client.getBank().getBank_id())).build());
+                .bank(bankServiceInterface.getBank(client.getBank().getBank_id())).build());
         return "/bank/offerCredit/offerCredit-create";
 
     }

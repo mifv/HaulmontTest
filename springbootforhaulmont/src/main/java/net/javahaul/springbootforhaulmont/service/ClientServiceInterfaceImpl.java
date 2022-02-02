@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class ClientServiceImpl implements ClientServiceInterface {
+public class ClientServiceInterfaceImpl implements ClientServiceInterface {
 
     private final ClientRepo clientRepo;
 
     @Autowired
-    public ClientServiceImpl(ClientRepo clientRepo) {
+    public ClientServiceInterfaceImpl(ClientRepo clientRepo) {
         this.clientRepo = clientRepo;
     }
 
@@ -24,18 +24,20 @@ public class ClientServiceImpl implements ClientServiceInterface {
     }
 
     @Override
-    public void deleteClientById(UUID id){
+    public void deleteClientById(UUID id) {
         clientRepo.deleteById(id);
     }
 
     @Override
-    public void saveClient(Client client) { clientRepo.save(client);
+    public void saveClient(Client client) {
+        clientRepo.save(client);
     }
 
     @Override
-    public List<Client> findBankId(UUID bankId) {
-        return clientRepo.findBankId(bankId);
+    public List<Client> findByBankId(UUID bankId) {
+        return clientRepo.findByBankId(bankId);
     }
 }
+
 
 

@@ -9,6 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface OfferCreditRepo extends JpaRepository<OfferCredit, UUID> {
-    List<OfferCredit> findClientId(UUID clientId);
+    List<OfferCredit> findByClientId(UUID clientId);
 
 }

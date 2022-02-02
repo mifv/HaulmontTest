@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface CreditRepo extends JpaRepository<Credit, UUID> {
-    List<Credit> findBankId(UUID bankId);
+    List<Credit> findByBankId(UUID bankId);
 }

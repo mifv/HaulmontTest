@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Управление кредитами</title>
@@ -12,7 +12,7 @@
 <div class="container-fluid my-2">
     <h1>Список кредитов</h1>
 
-    <a th:if="${!listOfCredits.isEmpty()}" th:href = "@{/credits/show_new_credit_form/{id}(id=${listOfCredits.get(0).bank.id})}" class="navbar navbar-expand-md navbar-dark"> Создать кредит </a>
+    <a th:if="${!listCredits.isEmpty()}" th:href = "@{/credits/show_new_credit_form/{id}(id=${listCredits.get(0).bank.id})}" class="navbar navbar-expand-md navbar-dark"> Создать кредит </a>
     <table border="3">
         <thead>
         <tr>
@@ -24,10 +24,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="credit : ${}">
+        <tr th:each="credit : ${listCredits}">
             <td th:text="${credit.limitOfMoney}"></td>
             <td th:text="${credit.creditPercentage}"></td>
-            <td th:text="${credit.typeCredit}"></td>
+            <td th:text="${credit.typeOfCredit}"></td>
             <td> <a th:href="@{/credits/show_form_for_update/{id}(id=${credit.id})}" class="navbar navbar-expand-md navbar-dark">Обновить</a>
             <td>   <a th:href="@{/credits/delete_credit/{id}(id=${credit.id})}" class="navbar navbar-expand-md navbar-dark">Удалить</a>
             </td>
@@ -39,5 +39,3 @@
 </div>
 </body>
 </html>
-
-

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Клиенты</title>
@@ -33,11 +33,11 @@
                     <td th:text="${client.lastName}"></td>
                     <td th:text="${client.firstName}"></td>
                     <td th:text="${client.middleName}"></td>
-                    <td th:text="${client.phone}"></td>
+                    <td th:text="${client.phoneNumber}"></td>
                     <td th:text="${client.email}"></td>
-                    <td th:text="${client.passport}"></td>
-                    <td> <a th:href="@{/credit_offers/show_new_credit_offer_form/{id}(id=${client.()})}" class="navbar navbar-expand-md navbar-dark"> Оформить кредитное предложение </a>
-                    <td> <a th:href="@{/clients/show_form_for_update/{id}(id=${client.id()})}" class="navbar navbar-expand-md navbar-dark"> Обновить данные о клиенте </a>
+                    <td th:text="${client.passportNumber}"></td>
+                    <td> <a th:href="@{/credit_offers/show_new_credit_offer_form/{id}(id=${client.getId()})}" class="navbar navbar-expand-md navbar-dark"> Оформить кредитное предложение </a>
+                    <td> <a th:href="@{/clients/show_form_for_update/{id}(id=${client.getId()})}" class="navbar navbar-expand-md navbar-dark"> Обновить данные о клиенте </a>
                     <td> <a th:href="@{/clients/delete_client/{id}(id=${client.getId()})}" class="navbar navbar-expand-md navbar-dark"> Удалить </a>
                     </td>
                 </tr>

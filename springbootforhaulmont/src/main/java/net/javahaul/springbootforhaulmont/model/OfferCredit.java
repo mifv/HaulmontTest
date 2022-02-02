@@ -41,10 +41,10 @@ public class OfferCredit {
     private List<ScheduleOfPayment> scheduleOfPayment;
 
     @Column(name = "NAME_OF_CREDIT")
-    private String nameCredit;
+    private String nameOfCredit;
 
     @Column(name = "SUM_OF_PERCENT")
-    private BigDecimal sumPercent;
+    private BigDecimal sumOfPercent;
 
     @Column(name = "FIRST_PAYMENT")
     private BigDecimal firstPayment;
@@ -68,7 +68,7 @@ public class OfferCredit {
 
     @Override
     public int hashCode() {
-        return Objects.hash(sum, nameCredit, sumPercent, firstPayment, creditTerm);
+        return Objects.hash(sum, nameOfCredit, sumOfPercent, firstPayment, creditTerm);
     }
 
     public UUID getId() {
@@ -111,20 +111,10 @@ public class OfferCredit {
         this.scheduleOfPayment = scheduleOfPayment;
     }
 
-    public String getNameCredit() {
-        return nameCredit;
-    }
 
-    public void setNameCredit(String nameCredit) {
-        this.nameCredit = nameCredit;
-    }
-
-    public BigDecimal getSumPercent() {
-        return sumPercent;
-    }
 
     public void setSumPercent(BigDecimal sumPercent) {
-        this.sumPercent = sumPercent;
+        this.sumOfPercent = sumPercent;
     }
 
     public BigDecimal getFirstPayment() {
@@ -149,6 +139,22 @@ public class OfferCredit {
 
     public void setBank(Bank bank) {
         this.bank = bank;
+    }
+
+    public String getNameOfCredit() {
+        return nameOfCredit;
+    }
+
+    public void setNameOfCredit(String nameOfCredit) {
+        this.nameOfCredit = nameOfCredit;
+    }
+
+    public BigDecimal getSumOfPercent() {
+        return sumOfPercent;
+    }
+
+    public void setSumOfPercent(BigDecimal sumOfPercent) {
+        this.sumOfPercent = sumOfPercent;
     }
 }
 

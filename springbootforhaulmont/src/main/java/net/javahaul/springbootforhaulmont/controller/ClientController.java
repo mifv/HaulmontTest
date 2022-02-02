@@ -17,22 +17,22 @@ public class ClientController {
     private final ClientServiceInterface clientServiceInterface;
     private final BankServiceInterface bankServiceInterface;
 
+
     @Autowired
     public ClientController(ClientServiceInterface clientServiceInterface, BankServiceInterface bankServiceInterface) {
         this.clientServiceInterface = clientServiceInterface;
         this.bankServiceInterface = bankServiceInterface;
     }
-
     @GetMapping("/clients_list/{bankId}")
     public String homePage(@PathVariable("bankId") UUID bankId, Model model) {
-        model.addAttribute("listClients", clientServiceInterface.findBankId(bankId));
+        model.addAttribute("listClients", clientServiceInterface.findByBankId(bankId));
         return "bank/client/client-list";
     }
 
     @GetMapping("/show_new_client_form/{bankId}")
     public String newClient(@PathVariable("bankId") UUID bankId, Model model) {
         Client client = new Client();
-        client.setBank(bankServiceInterface.findBankByID(bankId));
+        client.setBank(bankServiceInterface.getBank(bankId));
         model.addAttribute("client", client);
         return "bank/client/client-create";
 

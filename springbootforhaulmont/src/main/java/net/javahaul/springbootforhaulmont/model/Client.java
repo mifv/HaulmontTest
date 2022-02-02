@@ -28,11 +28,11 @@ public class Client {
     @Column(name = "LAST_NAME")
     private String lastName;
     @Column(name = "PHONE_NUMBER")
-    private String phone;
+    private String phoneNumber;
     @Column(name = "EMAIL")
     private String email;
     @Column(name = "PASSPORT_NUMBER")
-    private String passport;
+    private String passportNumber;
     @ManyToOne
     @JoinColumn(name = "BANK_ID")
     private Bank bank;
@@ -51,7 +51,7 @@ public class Client {
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, middleName, lastName, phone, email, passport);
+        return Objects.hash(firstName, middleName, lastName, phoneNumber, email, passportNumber);
     }
 
     public UUID getId() {
@@ -86,28 +86,29 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
     public String getEmail() {
         return email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPassportNumber() {
+        return passportNumber;
+    }
+
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
+    }
+
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassport() {
-        return passport;
-    }
-
-    public void setPassport(String passport) {
-        this.passport = passport;
     }
 
     public Bank getBank() {

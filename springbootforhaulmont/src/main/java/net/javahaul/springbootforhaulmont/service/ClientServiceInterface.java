@@ -10,7 +10,7 @@ public interface ClientServiceInterface {
 
     Client findClient(UUID id);
 
-    List<Client> findBankId(UUID bankId);
+    List<Client> findByBankId(UUID bankId);
 
     void deleteClientById(UUID id);
 

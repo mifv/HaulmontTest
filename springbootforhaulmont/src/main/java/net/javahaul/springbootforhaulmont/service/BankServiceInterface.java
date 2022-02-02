@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface BankServiceInterface {
-    Bank findBankByID(UUID id);
+    Bank getBank(UUID id);
 
-    List<Bank> findAll();
+    List<Bank> getALLBanks();
 
     void deleteBankById(UUID id);
 

@@ -21,7 +21,7 @@ public class OfferCreditServiceImpl implements OfferCreditServiceInterface {
 
     @Override
     public List<OfferCredit> findByClientId(UUID clientId) {
-        return offerCreditRepo.findClientId(clientId);
+        return offerCreditRepo.findByClientId(clientId);
     }
 
     @Nullable

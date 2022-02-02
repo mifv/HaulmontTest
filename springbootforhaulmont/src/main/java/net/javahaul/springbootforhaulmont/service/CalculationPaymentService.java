@@ -18,14 +18,13 @@ import java.util.List;
 public class CalculationPaymentService {
     private final OfferCreditServiceInterface offerCreditInterface;
     private final SchedulePaymentServiceInterface schedulePaymentServiceInterface;
+    private final EntityManager entityManager;
 
     public CalculationPaymentService(OfferCreditServiceInterface offerCreditInterface, SchedulePaymentServiceInterface schedulePaymentServiceInterface, EntityManager entityManager) {
         this.offerCreditInterface = offerCreditInterface;
         this.schedulePaymentServiceInterface = schedulePaymentServiceInterface;
         this.entityManager = entityManager;
     }
-
-    private final EntityManager entityManager;
 
 
     public void collectDataAboutOfferOfCredit(OfferCredit offerCredit) {
@@ -59,10 +58,10 @@ public class CalculationPaymentService {
             remainingCreditAmount = remainingCreditAmount.subtract(monthlyPaymentToBodyCredit);
             paymentScheduleList.add(
                     ScheduleOfPayment.builder()
-                            .amountPayment(monthPay)
-                            .datePayment(LocalDate.now().plusMonths(i + 1))
-                            .amountPaymentPerBody(monthlyPaymentToBodyCredit)
-                            .amountRepaymentPercent(monthlyPaymentToPercentCredit)
+                            .amountOfPayment(monthPay)
+                            .dateOfPayment(LocalDate.now().plusMonths(i + 1))
+                            .amountOfPaymentPerBody(monthlyPaymentToBodyCredit)
+                            .amountOfRepaymentPercent(monthlyPaymentToPercentCredit)
                             .balance(remainingCreditAmount.compareTo(BigDecimal.ZERO) > 0
                                     ? remainingCreditAmount
                                     : BigDecimal.ZERO)

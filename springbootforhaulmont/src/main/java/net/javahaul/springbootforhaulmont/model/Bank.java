@@ -13,11 +13,7 @@ import java.util.UUID;
 @Entity
 @ToString
 @Table(name = "BANK")
-
 public class Bank {
-    public UUID getBank_id() {
-        return id;
-    }
 
 
 
@@ -81,5 +77,8 @@ public class Bank {
 
     public void setListOfClients(List<Client> listOfClients) {
         this.listOfClients = listOfClients;
+    }
+    public UUID getBank_id() {
+        return id;
     }
 }

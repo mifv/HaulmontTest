@@ -23,7 +23,7 @@ public class BankController {
 
     @GetMapping({"/", "/bank_list"})
     public String homePage(Model model) {
-        model.addAttribute("listBank", bankServiceInterface.findAll());
+        model.addAttribute("listBank", bankServiceInterface.getALLBanks());
         return "/bank/bank-list";
     }
 
@@ -44,23 +44,24 @@ public class BankController {
 
     @GetMapping("/bank-view/{bankId}")
     public String showBank(@PathVariable("bankId") UUID bankId, Model model) {
-        model.addAttribute("bank", bankServiceInterface.findBankByID(bankId));
+        model.addAttribute("bank", bankServiceInterface.getBank(bankId));
         return "bank/bank-view";
 
     }
 
     @GetMapping("/show_form_for_update/{bankId}")
     public String updateFormBank(@PathVariable("bankId") UUID bankId, Model model) {
-        model.addAttribute("bank", bankServiceInterface.findBankByID(bankId));
+        model.addAttribute("bank", bankServiceInterface.getBank(bankId));
         return "bank/bank-update";
     }
 
     @GetMapping("delete_bank/{bankId}")
-    public String deleteBank(@PathVariable("bankId") UUID bankId, Model model) {
+    public String deleteBank(@PathVariable("bankId") UUID bankId) {
         bankServiceInterface.deleteBankById(bankId);
         return "redirect:/bank_list";
 
     }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public String onException() {
         return "Wrong page number";

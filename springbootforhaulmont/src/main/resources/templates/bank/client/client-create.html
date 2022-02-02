@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http:/thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Создать базу клиентов</title>
@@ -12,23 +12,18 @@
 <div class="container-fluid my-2">
     <hr>
     <h1 class="navbar navbar-expand-md navbar-dark">Добавить клиента</h1>
-
     <form action="#" th:action="@{/clients/save_client}" th:object="${client}" method="post">
-        <input type="hidden" th:field="*{bank}"/>
+        <input type="hidden" th:field="*{bank}" />
         <input type="text" th:field="*{lastName}" placeholder=" Фамилия " class="navbar navbar-expand-md navbar-dark">
         <input type="text" th:field="*{middleName}" placeholder=" Имя " class="navbar navbar-expand-md navbar-dark">
         <input type="text" th:field="*{firstName}" placeholder=" Отчество " class="navbar navbar-expand-md navbar-dark">
-        <input type="text" th:field="*{phone}" placeholder=" Номер телефона "
-               class="navbar navbar-expand-md navbar-dark">
-        <input type="text" th:field="*{email}" placeholder=" Электронная почта "
-               class="navbar navbar-expand-md navbar-dark">
-        <input type="text" th:field="*{passport}" placeholder=" Номер пасспорта "
-               class="navbar navbar-expand-md navbar-dark">
-        <button type="submit" class="navbar navbar-expand-md navbar-dark"> Создать</button>
+        <input type="text" th:field="*{phoneNumber}" placeholder=" Номер телефона " class="navbar navbar-expand-md navbar-dark">
+        <input type="text" th:field="*{email}" placeholder=" Электронная почта " class="navbar navbar-expand-md navbar-dark">
+        <input type="text" th:field="*{passportNumber}" placeholder=" Номер пасспорта " class="navbar navbar-expand-md navbar-dark">
+        <button type="submit" class="navbar navbar-expand-md navbar-dark"> Создать </button>
     </form>
     <hr>
-    <a th:href="@{/clients/clients_list/{id}(id=${client.bank.id})}"
-       class="navbar navbar-expand-md navbar-dark">Кленты</a>
+    <a th:href = "@{/clients/clients_list/{id}(id=${client.bank.id})}" class="navbar navbar-expand-md navbar-dark">Кленты</a>
     <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark">Домой</a>
 </div>
 </body>

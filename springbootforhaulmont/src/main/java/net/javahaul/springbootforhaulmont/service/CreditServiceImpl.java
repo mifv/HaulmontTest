@@ -26,7 +26,7 @@ public class CreditServiceImpl implements CreditServiceInterface {
 
     @Override
     public List<Credit> findBankId(UUID bankId) {
-        return creditRepo.findBankId(bankId);
+        return creditRepo.findByBankId(bankId);
     }
 
     @Override

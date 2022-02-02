@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Администрирование</title>
@@ -14,12 +14,12 @@
     <h2 class="navbar navbar-expand-md navbar-dark"> Обновить график платежей </h2>
     <form action="#" th:action="@{/payment_schedules/save_payment_schedule}" th:object="${paymentSchedule}" method="POST">
         <input type="hidden" th:field="*{id}" />
-        <input type="hidden" th:field="*{offerCredit}" />
+        <input type="hidden" th:field="*{offerOfCredit}" />
         <input type="hidden" th:field="*{balance}" />
-        <input type="text" th:field="*{datePayment}" placeholder=" Дата платежа " class="navbar navbar-expand-md navbar-dark">
-        <input type="number" th:field="*{amountPayment}" placeholder=" Сумма платежа " class="navbar navbar-expand-md navbar-dark">
-        <input type="number" th:field="*{amountPaymentPerBody}" placeholder=" Сумма гашения тела кредита " class="navbar navbar-expand-md navbar-dark">
-        <input type="number" th:field="*{amountRepaymentPercent}" placeholder=" Сумма гашения процентов " class="navbar navbar-expand-md navbar-dark">
+        <input type="text" th:field="*{dateOfPayment}" placeholder=" Дата платежа " class="navbar navbar-expand-md navbar-dark">
+        <input type="number" th:field="*{amountOfPayment}" placeholder=" Сумма платежа " class="navbar navbar-expand-md navbar-dark">
+        <input type="number" th:field="*{amountOfPaymentPerBody}" placeholder=" Сумма гашения тела кредита " class="navbar navbar-expand-md navbar-dark">
+        <input type="number" th:field="*{amountOfRepaymentPercent}" placeholder=" Сумма гашения процентов " class="navbar navbar-expand-md navbar-dark">
         <button type="submit" class="navbar navbar-expand-md navbar-dark"> Обновить график платежей </button>
     </form>
     <hr>

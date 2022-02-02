@@ -21,14 +21,14 @@ public class BankServiceInterfaceImpl implements BankServiceInterface {
     }
 
     @Override
-    public List<Bank> findAll() {
-        return bankRepository.findAll();
+    public List<Bank> getALLBanks() {
+      return   bankRepository.findAll();
 
     }
 
     @Nullable
     @Override
-    public Bank findBankByID(UUID id) {
+    public Bank getBank(UUID id) {
         return bankRepository.findById(id).orElse(null);
     }
 
