@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
@@ -34,7 +35,7 @@ public class OfferCreditController {
     @GetMapping("/credit_offers_list/{clientId}")
     public String homePage(@PathVariable("clientId") UUID clientId, Model model) {
         model.addAttribute("listCreditOffers", offerCreditServiceInterface.findByClientId(clientId));
-        return "/bank/offerCredit/offerCredit-list";
+        return "/bank/offerOfCredit/offerOfCredit-list";
     }
 
     @GetMapping("/show_new_credit_offer_form/{clientId}")
@@ -42,17 +43,17 @@ public class OfferCreditController {
         Client client = clientServiceInterface.findClient(clientId);
         model.addAttribute("offerOfCredit", OfferCredit.builder().client(client)
                 .bank(bankServiceInterface.getBank(client.getBank().getBank_id())).build());
-        return "/bank/offerCredit/offerCredit-create";
+        return "bank/offerOfCredit/offerOfCredit-create";
 
     }
 
     @PostMapping("/save_credit_offer")
-    public String saveOffer(@ModelAttribute("creditOffer") OfferCredit offerOfCredit,
+    public String saveOffer(@ModelAttribute("offerOfCredit") @Valid OfferCredit offerOfCredit,
                             BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return offerOfCredit.getId() == null
-                    ? "bank/offerCredit/offerCredit-create"
-                    : "bank/offerCredit/offerCredit-update";
+                    ? "/bank/offerOfCredit/offerOfCredit-create"
+                    : "/bank/offerOfCredit/offerOfCredit-update";
         }
         calculationPaymentService.collectDataAboutOfferOfCredit(offerOfCredit);
         UUID clientId = offerOfCredit.getClient().getId();
@@ -62,7 +63,7 @@ public class OfferCreditController {
     @GetMapping("/show_form_for_update/{offerOfCreditId}")
     public String formForUpdate(@PathVariable("offerOfCreditId") UUID offerOfCreditId, Model model) {
         model.addAttribute("offerOfCredit", offerCreditServiceInterface.findOfferOfCreditById(offerOfCreditId));
-        return "bank/offerCredit/offerCredit-update";
+        return "bank/offerOfCredit/offerOfCredit-update";
     }
 
     @GetMapping("/delete_credit_offer/{offerOfCreditId}")

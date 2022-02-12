@@ -2,8 +2,13 @@ package net.javahaul.springbootforhaulmont.model;
 
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -21,15 +26,36 @@ public class ScheduleOfPayment {
     @Column(name = "SCHEDULE_OF_PAYMENT_ID")
     private UUID id;
 
+    @NotNull(message = "Дата платежа является обязательным полем")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "DATE_OF_PAYMENT")
     private LocalDate dateOfPayment;
+
+    @NotNull(message = "Ограничение суммы платежа является обязательным полем")
+    @DecimalMin(value = "1.00", message = "Должно быть больше 1.00")
+    @DecimalMax(value = "200030001.00", message = "Должно быть меньше 200030001.00")
+    @Digits(integer = 9, fraction = 2, message = "Числа перед точкой должны быть не более 9 и " +
+            "после не более чем 2, например: 200030000.99")
     @Column(name = "AMOUNT_OF_PAYMENT")
     private BigDecimal amountOfPayment;
+
+    @NotNull(message = "Сумма платежа является обязательным полем")
+    @DecimalMin(value = "1.00", message = "Должно быть больше 1.00")
+    @DecimalMax(value = "200030001.00", message = "Должно быть меньше 200030001.00")
+    @Digits(integer = 9, fraction = 2, message = "Числа перед точкой должны быть не более 9 и " +
+            "после не более чем 2, например: 200030000.99")
     @Column(name = "AMOUNT_OF_PAYMENT_PER_BODY")
     private BigDecimal amountOfPaymentPerBody;
 
+    @NotNull(message = "Cумма оплаты процентов является обязательным полем")
+    @DecimalMin(value = "1.00", message = "Должно быть больше 1.00")
+    @DecimalMax(value = "200030001.00", message = "Должно быть меньше 200030001.00")
+    @Digits(integer = 9, fraction = 2, message = "Числа перед точкой должны быть не более 9 и " +
+            "после не более чем 2, например: 200030000.99")
     @Column(name = "AMOUNT_OF_REPAYMENT_PERCENT")
     private BigDecimal amountOfRepaymentPercent;
+
+
     @Column(name = "BALANCE")
     private BigDecimal balance;
 

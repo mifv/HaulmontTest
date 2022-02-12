@@ -14,11 +14,13 @@
     <hr>
 
     <form action="#" th:action="@{/save_bank}" th:object="${bank}" method="POST">
+        <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ошибка имени</div>
         <input type="text" th:field="*{name}" placeholder=" Название банка"  class="navbar navbar-expand-md navbar-dark">
         <button type="submit"  class="navbar navbar-expand-md navbar-dark"> Сохранить </button>
+        <a th:href = "@{/bank_list}"  class="btn btn-danger">Назад</a>
     </form>
     <hr>
-    <a th:href = "@{/bank_list}"  class="navbar navbar-expand-md navbar-dark">Список банков</a>
+
 </div>
 </body>
 </html>

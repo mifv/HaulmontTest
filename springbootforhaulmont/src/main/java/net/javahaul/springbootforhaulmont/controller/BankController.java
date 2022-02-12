@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
@@ -34,7 +35,7 @@ public class BankController {
     }
 
     @PostMapping("/save_bank")
-    public String saveBank(@ModelAttribute Bank bank, BindingResult bindingResult) {
+    public String saveBank(@ModelAttribute("bank") @Valid Bank bank, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return bank.getBank_id() == null ? "bank/bank-create" : "bank/bank-update";
         }

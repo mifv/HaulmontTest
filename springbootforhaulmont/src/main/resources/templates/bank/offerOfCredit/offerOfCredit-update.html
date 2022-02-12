@@ -15,6 +15,7 @@
 
 
     <form action="#" th:action="@{/credit_offers/save_credit_offer}" th:object="${offerOfCredit}" method="POST">
+        <div style="color:red" th:if="${#fields.hasErrors('credit')}" th:errors="*{credit}">Кредит ошибка</div>
         <select  th:value="${offerOfCredit}" name=" Кредитное предложение " class="navbar navbar-expand-md navbar-dark" th:field="*{credit}">
             <option value="" selected="selected" class="navbar navbar-expand-md navbar-dark"> Выбор кредита </option>
             <option th:each="credit : ${offerOfCredit.getBank().getListOfCredits()}" th:value="${credit.id}" th:text="${credit}" th:selected="${credit.id}"></option>
@@ -26,16 +27,21 @@
         <input type="hidden" th:field="*{sumOfPercent}" />
         <input type="hidden" th:field="*{scheduleOfPayment}" />
         <br>
+        <div style="color:red" th:if="${#fields.hasErrors('nameOfCredit')}" th:errors="*{nameOfCredit}">Название кредита ошибка</div>
         <input type="text" th:field="*{nameOfCredit}" placeholder=" Название кредита" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('sum')}" th:errors="*{sum}">Сумма кредита ошибка</div>
         <input type="number" th:field="*{sum}" placeholder=" Сумма кредита " class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('creditTerm')}" th:errors="*{creditTerm}">Срок кредита ошибка</div>
         <input type="number" th:field="*{creditTerm}" placeholder=" Срок кредита " class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('firstPayment')}" th:errors="*{firstPayment}">Первый платеж ошибка</div>
         <input type="number" th:field="*{firstPayment}" placeholder=" Первый платеж " class="navbar navbar-expand-md navbar-dark">
 
         <button type="submit" class="navbar navbar-expand-md navbar-dark"> Обновить кредитное предложение </button>
+        <a th:href = "@{/credit_offers/credit_offers_list/{id}(id=${offerOfCredit.client.id})}" class="btn btn-danger"> Назад </a>
+        <a th:href="@{/}" class="btn btn-danger">Выход</a>
     </form>
     <hr>
-    <a th:href = "@{/credit_offers/credit_offers_list/{id}(id=${offerOfCredit.client.id})}" class="navbar navbar-expand-md navbar-dark"> Список кредитных предложений для клиента </a>
-    <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark">Дом</a>
+
 </div>
 </body>
 </html>

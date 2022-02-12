@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
@@ -15,7 +16,8 @@ import java.util.UUID;
 public class SchedulePaymentController {
 
     public SchedulePaymentServiceInterface schedulePaymentServiceInterface;
-@Autowired
+
+    @Autowired
     public SchedulePaymentController(SchedulePaymentServiceInterface schedulePaymentServiceInterface) {
         this.schedulePaymentServiceInterface = schedulePaymentServiceInterface;
     }
@@ -27,7 +29,7 @@ public class SchedulePaymentController {
     }
 
     @PostMapping("/save_payment_schedule")
-    public String saveScheduleOfPayment(@ModelAttribute("paymentSchedule") ScheduleOfPayment schedulePayment,
+    public String saveScheduleOfPayment(@ModelAttribute("schedulePayment") @Valid ScheduleOfPayment schedulePayment,
                                         BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "/bank/schedulePayment/scheduleOfPayment-update";

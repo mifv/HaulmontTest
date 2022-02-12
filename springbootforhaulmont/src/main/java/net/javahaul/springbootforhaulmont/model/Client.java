@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -13,7 +15,7 @@ import java.util.UUID;
 @ToString
 @Entity
 
-@Table(name="CLIENT")
+@Table(name = "CLIENT")
 public class Client {
 
 
@@ -21,21 +23,40 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CLIENT_ID")
     private UUID id;
+
+    @NotBlank(message = "Имя является обязательным полем")
     @Column(name = "FIRST_NAME")
     private String firstName;
+
+    @NotBlank(message = "Отчество является обязательным полем")
     @Column(name = "MIDDLE_NAME")
     private String middleName;
+
+    @NotBlank(message = "Фамилия является обязательным полем")
     @Column(name = "LAST_NAME")
     private String lastName;
+
+    @NotBlank(message = "Номер телефона является обязательным полем")
+    @Pattern(regexp = "\\d{3}-\\d{3}-\\d{2}-\\d{2}",
+            message = "Пожалуйста используйте шаблон XXX-XXX-XX-XX for example \"987-964-39-60\"")
     @Column(name = "PHONE_NUMBER")
     private String phoneNumber;
+
+    @Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*" +
+            "(\\.[A-Za-z]{2,})$", message = "Пожалуйста используйте шаблон \"login@siteAddress.domainName\" " +
+            "for example \"top@yandex.com\"")
     @Column(name = "EMAIL")
     private String email;
+
+    @NotBlank(message = "Номер паспорта является обязательным полем")
+    @Pattern(regexp = "\\d{2}-\\d{2}-\\d{6}", message = "Пожалуйста используйте шаблон XX-XX-XXXXXX for example \"36-11-502830\"")
     @Column(name = "PASSPORT_NUMBER")
     private String passportNumber;
+
     @ManyToOne
     @JoinColumn(name = "BANK_ID")
     private Bank bank;
+
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<OfferCredit> offerCreditList;

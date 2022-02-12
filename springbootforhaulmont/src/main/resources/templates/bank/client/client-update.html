@@ -7,6 +7,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
+
 </head>
 <body>
 <div class="container-fluid my-2">
@@ -16,17 +17,27 @@
     <form action="#" th:action="@{/clients/save_client/}" th:object="${client}" method="POST">
         <input type="hidden" th:field="*{id}" />
         <input type="hidden" th:field="*{bank}" />
-        <input type="text" th:field="*{lastName}" placeholder=" Фамилия " class="navbar navbar-expand-md navbar-dark">
-        <input type="text" th:field="*{firstName}" placeholder=" Имя " class="navbar navbar-expand-md navbar-dark">
-        <input type="text" th:field="*{middleName}" placeholder=" Отчество " class="navbar navbar-expand-md navbar-dark">
-        <input type="text" th:field="*{phoneNumber}" placeholder=" Номер телефона " class="navbar navbar-expand-md navbar-dark">
-        <input type="text" th:field="*{email}" placeholder=" Электронная почта " class="navbar navbar-expand-md navbar-dark">
-        <input type="text" th:field="*{passportNumber}" placeholder=" Номер пасспорта" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Ошибка имени</div>
+        <input type="text" th:field="*{lastName}" placeholder="Фамилия" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">Ошибка имени</div>
+        <input type="text" th:field="*{firstName}" placeholder="Имя" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('middleName')}" th:errors="*{middleName}">Ошибка имени</div>
+        <input type="text" th:field="*{middleName}" placeholder="Отчество" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}">Номер телефона ошибка</div>
+        <input type="text" th:field="*{phoneNumber}" placeholder="Номер телефона" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email ошибка</div>
+        <input type="text" th:field="*{email}" placeholder="Электронная почта" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('passportNumber')}" th:errors="*{passportNumber}">Номер паспорта error</div>
+        <input type="text" th:field="*{passportNumber}" placeholder="Номер паспорта" class="navbar navbar-expand-md navbar-dark">
         <button type="submit" class="navbar navbar-expand-md navbar-dark">Обновить данные</button>
+        <a th:href="@{/clients/clients_list/{id}(id=${client.bank.id})}" class="btn btn-danger">Назад</a>
+        <a th:href="@{/}" class="btn btn-danger">Выход</a>
+
     </form>
+
     <hr>
-    <a th:href = "@{/clients/clients_list/{id}(id=${client.bank.id})}" class="navbar navbar-expand-md navbar-dark">Список клиентов</a>
-    <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark">Домой</a>
+
+
 </div>
 </body>
 </html>

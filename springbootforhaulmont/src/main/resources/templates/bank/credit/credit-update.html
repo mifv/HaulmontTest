@@ -12,18 +12,22 @@
 <div class="container-fluid my-2">
     <hr>
     <h1> Обновить кредит</h1>
-    <form action="#" th:action="@{/credits/save_credit}" th:object="${credit}" method="POST">
-
+    <form action="#" th:action="@{/credits/save_credit/}" th:object="${credit}" th:method="POST">
+        <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
         <input type="hidden" th:field="*{bank}" />
-        <input type="text" th:field="*{limitOfMoney}" placeholder=" Лимит по кредиту " class="navbar navbar-expand-md navbar-dark">
-        <input type="number" step="0.01" min="0" th:field="*{creditPercentage}" placeholder=" Процентная ставка " class="navbar navbar-expand-md navbar-dark">
-        <input type="text" th:field="*{typeOfCredit}" placeholder=" Название кредита" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('typeOfCredit')}" th:errors="*{typeOfCredit}">Название кредита ошибка</div>
+        <input type="text" th:field="*{typeOfCredit}" placeholder="Название кредита" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('limitOfMoney')}" th:errors="*{limitOfMoney}">Лимит по кредиту ошибка</div>
+        <input type="number" th:field="*{limitOfMoney}" placeholder="Лимит по кредиту" class="navbar navbar-expand-md navbar-dark">
+        <div style="color:red" th:if="${#fields.hasErrors('creditPercentage')}" th:errors="*{creditPercentage}">Процентная ставка ошибка</div>
+        <input type="number" step="0.01" min="0" th:field="*{creditPercentage}" placeholder="Процентная ставка" class="navbar navbar-expand-md navbar-dark">
         <button type="submit" class="navbar navbar-expand-md navbar-dark"> Обновить кредит </button>
+        <a th:href = "@{/credits/credits_list/{id}(id=${credit.bank.id})}" class="btn btn-danger"> Назад </a>
+        <a th:href="@{/}" class="btn btn-danger"> Выход </a>
     </form>
     <hr>
-    <a th:href = "@{/credits/credits_list/{id}(id=${credit.bank.id})}" class="navbar navbar-expand-md navbar-dark"> Список кредитов </a>
-    <a th:href="@{/}" class="navbar navbar-expand-md navbar-dark"> Дом </a>
+
 </div>
 </body>
 </html>

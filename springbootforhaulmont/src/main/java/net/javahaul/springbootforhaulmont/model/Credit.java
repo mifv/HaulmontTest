@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -13,26 +14,40 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
-@Table(name ="CREDIT")
-public class Credit {
+@Table(name = "CREDIT")
+public class Credit  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CREDIT_ID")
     private UUID id;
 
-    @Column(name = "LIMIT_OF_MONEY")
-    private BigDecimal limitOfMoney;
-    @Column(name = "CREDIT_PERCENTAGE")
-    private BigDecimal creditPercentage;
-
-    @Column(name = "TYPE_OF_CREDIT")
-    public String typeOfCredit;
-
     @ManyToOne
     @JoinColumn(name = "BANK_ID")
     private Bank bank;
+
+    @NotNull(message = "Кредитный лимит является обязательным полем")
+    @DecimalMin(value = "1,00", message = "Должно быть больше 1,00")
+    @DecimalMax(value = "200030001,00", message = "Должно быть меньше 200030001,00")
+    @Digits(integer = 9, fraction = 2, message = "Числа перед точкой должны быть не более 9 и " +
+            "после не более чем 2, например: 200030000.99")
+    @Column(name = "LIMIT_OF_MONEY")
+    private BigDecimal limitOfMoney;
+
+    @NotNull(message = "Обязательное поле Процентная ставка по кредиту в год")
+    @DecimalMin(value = "5.00", message = "Должно быть больше 5,00")
+    @DecimalMax(value = "360.00", message = "Должно быть меньше 360,00")
+    @Digits(integer = 3, fraction = 2, message = "Числа перед точкой должны быть не более 3 и " +
+            "после не более чем 2, например: 359,99")
+    @Column(name = "CREDIT_PERCENTAGE")
+    private BigDecimal creditPercentage;
+
+    @NotBlank(message = "Название является обязательным полем")
+    @Size(min = 2, message = "Название должно быть не менее 2 символов")
+    @Column(name = "TYPE_OF_CREDIT")
+    public String typeOfCredit;
+
+
 
     @OneToMany(mappedBy = "credit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OfferCredit> offerOfCreditList;
@@ -107,6 +122,7 @@ public class Credit {
     public void setOfferOfCreditList(List<OfferCredit> offerOfCreditList) {
         this.offerOfCreditList = offerOfCreditList;
     }
+
 }
 
 

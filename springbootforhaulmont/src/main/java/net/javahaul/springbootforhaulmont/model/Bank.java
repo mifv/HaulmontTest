@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -16,12 +18,13 @@ import java.util.UUID;
 public class Bank {
 
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "BANK_ID")
     private UUID id;
 
+    @NotBlank(message = "Название банка является обязательным полем")
+    @Size(min = 2, message = "Название должно содержать минимум 2 символа")
     @Column(name = "BANK_NAME")
     private String name;
 
@@ -78,6 +81,7 @@ public class Bank {
     public void setListOfClients(List<Client> listOfClients) {
         this.listOfClients = listOfClients;
     }
+
     public UUID getBank_id() {
         return id;
     }

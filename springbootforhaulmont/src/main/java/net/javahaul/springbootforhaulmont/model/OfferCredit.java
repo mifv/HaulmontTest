@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -29,10 +30,17 @@ public class OfferCredit {
     @ManyToOne(cascade = CascadeType.MERGE)
     private Client client;
 
+    @NotNull(message = "Кредит является обязательным полем")
     @JoinColumn(name = "CREDIT_ID")
     @ManyToOne(cascade = CascadeType.MERGE)
     private Credit credit;
 
+
+    @NotNull(message = "Сумма является обязательным полем")
+    @DecimalMin(value = "1.00", message = "Должно быть больше, чем 1.00")
+    @DecimalMax(value = "200030001.00", message = "Должно быть меньше, чем 200030001.00")
+    @Digits(integer = 9, fraction = 2, message = "Числа перед точкой должны быть не более 9 и " +
+            "после не более чем 2, например: 200030000.99")
     @Column(name = "SUM_OF_CREDIT")
     private BigDecimal sum;
 
@@ -40,15 +48,24 @@ public class OfferCredit {
     @OneToMany(mappedBy = "offerOfCredit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ScheduleOfPayment> scheduleOfPayment;
 
+    @NotBlank(message = "Название является обязательным полем")
+    @Size(min = 2, message = "Название должно быть не менее 2 символов")
     @Column(name = "NAME_OF_CREDIT")
     private String nameOfCredit;
 
     @Column(name = "SUM_OF_PERCENT")
     private BigDecimal sumOfPercent;
 
+    @DecimalMax(value = "200030001.00", message = "Должно быть меньше 200030001.00")
+    @Digits(integer = 9, fraction = 2, message = "Числа перед точкой должны быть не более 9 и " +
+            "после не более чем 2, например: 200030000.99")
     @Column(name = "FIRST_PAYMENT")
     private BigDecimal firstPayment;
 
+
+    @NotNull(message = "Срок кредита является обязательным полем")
+    @Min(value = 2, message = "Должно быть больше 2")
+    @Max(value = 480, message = "Должно быть меньше 480")
     @Column(name = "CREDIT_TERM")
     private Integer creditTerm;
 

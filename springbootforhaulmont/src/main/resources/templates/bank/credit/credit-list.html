@@ -11,7 +11,6 @@
 <body>
 <div class="container-fluid my-2">
     <h1>Список кредитов</h1>
-
     <a th:if="${!listCredits.isEmpty()}" th:href = "@{/credits/show_new_credit_form/{id}(id=${listCredits.get(0).bank.id})}" class="navbar navbar-expand-md navbar-dark"> Создать кредит </a>
     <table border="3">
         <thead>

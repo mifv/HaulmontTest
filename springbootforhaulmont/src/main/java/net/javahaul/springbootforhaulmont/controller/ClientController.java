@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
@@ -39,7 +40,7 @@ public class ClientController {
     }
 
     @PostMapping("save_client")
-    public String saveClient(@ModelAttribute Client client, BindingResult bindingResult) {
+    public String saveClient(@ModelAttribute("client") @Valid Client client, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return client.getId() == null ? "bank/client/client-create" : "bank/client/client-update";
         }
