@@ -3,6 +3,7 @@ package net.javahaul.springbootforhaulmont.service;
 import net.javahaul.springbootforhaulmont.model.Credit;
 import net.javahaul.springbootforhaulmont.repository.CreditRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class CreditServiceImpl implements CreditServiceInterface {
         this.creditRepo = creditRepo;
     }
 
+    @Nullable
     @Override
     public Credit findCredit(UUID id) {
         return creditRepo.findById(id).orElse(null);

@@ -27,7 +27,7 @@
         <div style="color:red" th:if="${#fields.hasErrors('passportNumber')}" th:errors="*{passportNumber}">Номер паспорта ошибка</div>
         <input type="text" th:field="*{passportNumber}" placeholder=" Номер паспорта " class="navbar navbar-expand-md navbar-dark">
         <button type="submit" class="navbar navbar-expand-md navbar-dark"> Создать </button>
-        <a th:href = "@{/clients/clients_list/{id}(id=${client.bank.id})}" class="btn btn-danger">Назад</a>
+        <a th:href = "@{clients/clients_list/{id}(id=${client.bank.id})}" class="btn btn-danger">Назад</a>
         <a th:href="@{/}" class="btn btn-danger">Выход</a>
     </form>
     <hr>

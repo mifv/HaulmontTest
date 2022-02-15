@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
+
 public class SpringbootforhaulmontApplication {
 
     public static void main(String[] args) {

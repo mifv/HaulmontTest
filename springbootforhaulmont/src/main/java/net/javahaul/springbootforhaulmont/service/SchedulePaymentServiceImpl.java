@@ -4,6 +4,7 @@ package net.javahaul.springbootforhaulmont.service;
 import net.javahaul.springbootforhaulmont.model.ScheduleOfPayment;
 import net.javahaul.springbootforhaulmont.repository.SchedulePaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class SchedulePaymentServiceImpl implements SchedulePaymentServiceInterfa
     public void saveScheduleOfPayment(ScheduleOfPayment scheduleOfPayment) {
         schedulePaymentRepo.save(scheduleOfPayment);
     }
-
+@Nullable
     @Override
     public ScheduleOfPayment findScheduleOfPaymentById(UUID id) {
         return schedulePaymentRepo.findById(id).orElse(null);

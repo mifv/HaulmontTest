@@ -13,7 +13,6 @@
     <hr>
     <h1> Обновить кредит</h1>
     <form action="#" th:action="@{/credits/save_credit/}" th:object="${credit}" th:method="POST">
-        <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id}" />
         <input type="hidden" th:field="*{bank}" />
         <div style="color:red" th:if="${#fields.hasErrors('typeOfCredit')}" th:errors="*{typeOfCredit}">Название кредита ошибка</div>

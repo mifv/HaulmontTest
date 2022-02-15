@@ -3,6 +3,7 @@ package net.javahaul.springbootforhaulmont.service;
 import net.javahaul.springbootforhaulmont.model.Client;
 import net.javahaul.springbootforhaulmont.repository.ClientRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class ClientServiceInterfaceImpl implements ClientServiceInterface {
     public ClientServiceInterfaceImpl(ClientRepo clientRepo) {
         this.clientRepo = clientRepo;
     }
-
+    @Nullable
     @Override
     public Client findClient(UUID clientId) {
         return clientRepo.findById(clientId).orElse(null);

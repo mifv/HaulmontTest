@@ -27,8 +27,8 @@ public class Credit  {
     private Bank bank;
 
     @NotNull(message = "Кредитный лимит является обязательным полем")
-    @DecimalMin(value = "1,00", message = "Должно быть больше 1,00")
-    @DecimalMax(value = "200030001,00", message = "Должно быть меньше 200030001,00")
+    @DecimalMin(value = "1.00", message = "Должно быть больше 1,00")
+    @DecimalMax(value = "200030001.00", message = "Должно быть меньше 200030001,00")
     @Digits(integer = 9, fraction = 2, message = "Числа перед точкой должны быть не более 9 и " +
             "после не более чем 2, например: 200030000.99")
     @Column(name = "LIMIT_OF_MONEY")

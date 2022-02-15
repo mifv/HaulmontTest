@@ -18,9 +18,6 @@ public class BankController {
         this.bankServiceInterface = bankServiceInterface;
     }
 
-    public BankServiceInterface getBankServiceInterface() {
-        return bankServiceInterface;
-    }
 
     @GetMapping({"/", "/bank_list"})
     public String homePage(Model model) {

@@ -1,6 +1,5 @@
 package net.javahaul.springbootforhaulmont.controller;
 
-import lombok.RequiredArgsConstructor;
 import net.javahaul.springbootforhaulmont.model.Credit;
 import net.javahaul.springbootforhaulmont.service.BankServiceInterface;
 import net.javahaul.springbootforhaulmont.service.CreditServiceInterface;
@@ -12,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.UUID;
-@RequiredArgsConstructor
 @Controller
 @RequestMapping("/credits")
 public class CreditController {
+
     private BankServiceInterface bankServiceInterface;
     private CreditServiceInterface creditServiceInterface;
-
-    @Autowired
+     @Autowired
     public CreditController(BankServiceInterface bankServiceInterface, CreditServiceInterface creditServiceInterface) {
         this.bankServiceInterface = bankServiceInterface;
         this.creditServiceInterface = creditServiceInterface;
@@ -28,25 +26,23 @@ public class CreditController {
     @GetMapping("/credits_list/{bankId}")
     public String homePage(@PathVariable("bankId") UUID bankId, Model model) {
         model.addAttribute("listCredits", creditServiceInterface.findBankId(bankId));
-        return "/bank/credit/credit-list";
+        return "/bank/credits/credit-list";
     }
 
     @GetMapping("/show_new_credit_form/{bankId}")
     public String newCredit(Model model, @PathVariable("bankId") UUID bankId) {
         Credit credit = new Credit();
         credit.setBank(bankServiceInterface.getBank(bankId));
-       model.addAttribute("credit",credit);
-        return "bank/credit/credit-create";
+       model.addAttribute("credit", credit);
+        return "bank/credits/credit-create";
     }
 
     @PostMapping("/save_credit")
-    public String saveCredit(BindingResult bindingResult,@ModelAttribute("credit")@Valid Credit credit) {
+    public String saveCredit(@ModelAttribute("credit") @Valid Credit credit, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return credit.getId() == null
-                    ? "/bank/credit/credit-create"
-                    : "/bank/credit/credit-update";
+            return credit.getId() == null ? "/bank/credits/credit-create" : "/bank/credits/credit-update";
         }
-        UUID bankId = credit.getBank().getBank_id();
+        UUID bankId = credit.getBank().getId();
         creditServiceInterface.saveCredit(credit);
         return String.format("redirect:/credits/credits_list/%s", bankId);
     }
@@ -54,7 +50,7 @@ public class CreditController {
     @GetMapping("/show_form_for_update/{creditId}")
     public String formUpdate(@PathVariable("creditId") UUID creditId, Model model) {
         model.addAttribute("credit", creditServiceInterface.findCredit(creditId));
-        return "bank/credit/credit-update";
+        return "bank/credits/credit-update";
     }
 
     @GetMapping("/delete_credit/{creditId}")
@@ -64,8 +60,4 @@ public class CreditController {
         return String.format("redirect:/credits/credits_list/%s", bankId);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public String onException() {
-        return "Wrong page number";
-    }
 }

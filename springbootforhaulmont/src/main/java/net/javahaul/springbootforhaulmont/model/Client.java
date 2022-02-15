@@ -49,7 +49,7 @@ public class Client {
     private String email;
 
     @NotBlank(message = "Номер паспорта является обязательным полем")
-    @Pattern(regexp = "\\d{2}-\\d{2}-\\d{6}", message = "Пожалуйста используйте шаблон XX-XX-XXXXXX for example \"36-11-502830\"")
+    @Pattern(regexp = "\\d{2}-\\d{2}-\\d{6}", message = "Пожалуйста используйте шаблон  XX-XX-XXXXXX for example \"36-11-502830\"")
     @Column(name = "PASSPORT_NUMBER")
     private String passportNumber;
 
